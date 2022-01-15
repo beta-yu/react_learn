@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>类式组件</title>
+</head>
+
+<body>
+  <div id="test"></div>
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    class Weather extends React.Component {
+      // 给Weather的实例对象添加一个属性为state
+      state = { isHot: true }
+      // 自定义方法要用赋值语句加箭头函数
+      // 箭头函数没有自己的this, 如果函数内部使用了this, 会去外部找this，就是实例对象本身
+      changeWeather = () => {
+        const isHot = this.state.isHot
+        this.setState({ isHot: !isHot })
+      }
+
+      render() {
+        return <h2 onClick={this.changeWeather}>今天天气很{this.state.isHot ? '炎热' : '凉爽'}</h2>
+      }
+    }
+    ReactDOM.render(<Weather />, document.getElementById('test'))
+
+  </script>
+</body>
+
+</html>

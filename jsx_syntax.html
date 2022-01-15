@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Test</title>
+  <style>
+    .title {
+      background-color: orange;
+      width: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="test"></div>
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- babel将jsx转为js -->
+  <script type="text/babel">
+    const myId = "123"
+    const myData = "hahha"
+
+    // 创建虚拟DOM
+    const VDOM = (
+      <div>
+        <h2 className="title" id={myId.toLowerCase()}>
+          {/*jsx中内联样式的style, style={{key:value}}*/}
+          <span style={{ color: 'white', fontSize: '30px' }}>{myData.toLowerCase()}</span>
+        </h2>
+        <input type="text"/>
+      </div>
+    )
+    /**
+     * 1. 虚拟DOM必须只有一个根标签
+     * 2. 标签必须闭合
+     * 3. 标签中有js表达式时需要用{}
+     * 4. 标签首字母
+     *    4.1 若小写字母开头，则将该标签转为html标签，若没有对应的同名html标签则会报错
+     *    4.2 若大写字母开头，react就去渲染对应的react组件
+    */
+
+    ReactDOM.render(VDOM, document.getElementById("test"))
+  </script>
+</body>
+
+</html>
